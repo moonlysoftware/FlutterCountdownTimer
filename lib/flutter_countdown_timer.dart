@@ -2,21 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_countdown_timer/index.dart';
 
-typedef CountdownTimerWidgetBuilder = Widget Function(
-    BuildContext context, CurrentRemainingTime? time);
+typedef CountdownTimerWidgetBuilder = Widget Function(BuildContext context, CurrentRemainingTime? time);
 
 /// A Countdown.
 class CountdownTimer extends StatefulWidget {
   ///Widget displayed after the countdown
   final Widget endWidget;
+
   ///Used to customize the countdown style widget
   final CountdownTimerWidgetBuilder? widgetBuilder;
+
   ///Countdown controller, can end the countdown event early
   final CountdownTimerController? controller;
+
   ///Countdown text style
   final TextStyle? textStyle;
+
   ///Event called after the countdown ends
   final VoidCallback? onEnd;
+
   ///The end time of the countdown.
   final int? endTime;
 
@@ -40,13 +44,11 @@ class CountdownTimer extends StatefulWidget {
 class _CountDownState extends State<CountdownTimer> {
   late CountdownTimerController controller;
 
-  CurrentRemainingTime? get currentRemainingTime =>
-      controller.currentRemainingTime;
+  CurrentRemainingTime? get currentRemainingTime => controller.currentRemainingTime;
 
   Widget get endWidget => widget.endWidget;
 
-  CountdownTimerWidgetBuilder get widgetBuilder =>
-      widget.widgetBuilder ?? builderCountdownTimer;
+  CountdownTimerWidgetBuilder get widgetBuilder => widget.widgetBuilder ?? builderCountdownTimer;
 
   TextStyle? get textStyle => widget.textStyle;
 
@@ -58,8 +60,7 @@ class _CountDownState extends State<CountdownTimer> {
 
   ///Generate countdown controller.
   initController() {
-    controller = widget.controller ??
-        CountdownTimerController(endTime: widget.endTime!, onEnd: widget.onEnd);
+    controller = widget.controller ?? CountdownTimerController(endTime: widget.endTime!, onEnd: widget.onEnd);
     if (controller.isRunning == false) {
       controller.start();
     }
@@ -84,15 +85,14 @@ class _CountDownState extends State<CountdownTimer> {
     return widgetBuilder(context, currentRemainingTime);
   }
 
-  Widget builderCountdownTimer(
-      BuildContext context, CurrentRemainingTime? time) {
+  Widget builderCountdownTimer(BuildContext context, CurrentRemainingTime? time) {
     if (time == null) {
       return endWidget;
     }
     String value = '';
     if (time.days != null) {
       var days = _getNumberAddZero(time.days!);
-      value = '$value$days days ';
+      value = '$value$days dagen ';
     }
     var hours = _getNumberAddZero(time.hours ?? 0);
     value = '$value$hours : ';
